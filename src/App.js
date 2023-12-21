@@ -1,3 +1,4 @@
+import { useState } from "react";
 import "./styles.css";
 
 export default function App() {
@@ -34,6 +35,35 @@ export default function App() {
   );
 }
 
-function TextExpander() {
-  return <div>TODO</div>;
+function TextExpander({
+  collapsedNumWords,
+  expandButtonText = "Show more",
+  collapseButtonText = "show less",
+  buttonColor = "skyblue",
+  expanded,
+  className,
+  children,
+}) {
+  const [isExpended, setIsExpended] = useState(expanded);
+  const buttonStyle = {
+    background: "none",
+    border: "none",
+    font: "inherit",
+    cursor: "pointer",
+    marginLeft: "6px",
+    color: buttonColor,
+  };
+  return (
+    <div className={className}>
+      <span>
+        {isExpended ? children : "test"}
+        <button
+          onClick={() => setIsExpended((exp) => !exp)}
+          style={buttonStyle}
+        >
+          {isExpended ? collapseButtonText : expandButtonText}
+        </button>
+      </span>
+    </div>
+  );
 }
